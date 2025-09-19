@@ -1,0 +1,42 @@
+### create new product
+PUT http://localhost:8080/api/products/AK21101
+accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Keyboard",
+  "description": "Ergonomic Keyboard",
+  "price": 60
+}
+
+### get all products
+GET http://localhost:8080/api/products
+accept: application/json
+
+### get product by productId
+GET http://localhost:8080/api/products/AK21101
+accept: application/json
+
+###delete product by productId
+DELETE http://localhost:8080/api/products/AK21101
+accept: application/json
+
+### update product description
+PATCH http://localhost:8080/api/products/AK21101
+accept: application/json
+Content-Type: application/json
+
+{
+  "description": "Ergonomic Keyboard 2.0"
+}
+
+### create product repeated
+PUT http://localhost:8080/api/products/AAAA
+accept: application/json
+Content-Type: application/json
+
+{
+  "name": "Keyboard",
+  "description": "Ergonomic Keyboard",
+  "price": 60
+}
