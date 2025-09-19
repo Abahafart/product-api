@@ -1,5 +1,9 @@
 *
+!build/app/
+!build/app/*-runner
 !build/*-runner
 !build/*-runner.jar
 !build/lib/*
 !build/quarkus-app/*
+!build/quarkus-build/app/*
+!wait-for-it.sh

@@ -1,0 +1,29 @@
+services:
+  database:
+    image: postgres:16.2-alpine3.19
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=products
+    ports:
+      - "20000:5432"
+    networks:
+      - products-network
+  product-api:
+    build:
+      context: .
+      dockerfile: src/main/docker/Dockerfile.native
+    image: product-api
+    ports:
+      - "8080:8080"
+    environment:
+      - QUARKUS_DATASOURCE_JDBC_URL=jdbc:postgresql://database:5432/products
+      - QUARKUS_DATASOURCE_USERNAME=user
+      - QUARKUS_DATASOURCE_PASSWORD=password
+    networks:
+      - products-network
+    depends_on:
+      - database
+networks:
+  products-network:
+    driver: bridge

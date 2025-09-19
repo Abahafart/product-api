@@ -1,0 +1,12 @@
+docker compose up -d
+docker compose down
+docker compose ps
+docker ps
+docker network ls
+docker network inspect products-network
+docker inspect product-api
+docker inspect database
+docker logs -f product-api
+docker network create products-network
+docker run -d --name product-api --network products-network -p 8080:8080 product-api
+docker build -t product-api -f src/main/docker/Dockerfile.native .
