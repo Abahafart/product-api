@@ -30,7 +30,7 @@ Content-Type: application/json
   "description": "Ergonomic Keyboard 2.0"
 }
 
-### create product repeated
+### create product repeated sku throws exception
 PUT http://localhost:8080/api/products/AAAA
 accept: application/json
 Content-Type: application/json

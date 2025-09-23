@@ -4,12 +4,13 @@ import java.util.Objects;
 
 import com.arch.adapter.outbound.database.entity.ProductEntity;
 import com.arch.adapter.outbound.mapper.ProductOutMapper;
+import com.arch.domain.ExceptionConstants;
 import com.arch.domain.Product;
 import com.arch.usecase.ProductsCommandUseCase;
 import com.arch.usecase.dto.CreateProduct;
 
 import jakarta.enterprise.context.ApplicationScoped;
-import jakarta.inject.Inject;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Transactional
@@ -38,7 +39,9 @@ public class ProductsCommandUseCaseImpl implements ProductsCommandUseCase {
 
   @Override
   public Product updateProductDescription(String productId, String description) {
-    ProductEntity found = ProductEntity.findById(productId);
+    ProductEntity found = (ProductEntity) ProductEntity.findByIdOptional(productId)
+        .orElseThrow(() -> new EntityNotFoundException(String.format(
+            ExceptionConstants.PRODUCT_NOT_FOUND, productId)));
     found.setDescription(description);
     found.persist();
     return mapper.fromEntity(found);
